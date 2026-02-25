@@ -3,81 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tra cứu Khu vực bỏ phiếu Xã Bình Hưng</title>
+    <title>Cổng Thông Tin Bầu Cử Xã Bình Hưng</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .card-hover:hover { transform: translateY(-8px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .modal-active { display: flex !important; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-slate-50 text-slate-900 font-sans">
 
-    <header class="bg-red-700 text-white py-8 shadow-md">
-        <div class="container mx-auto px-4 text-center">
-            <h1 id="title" class="text-2xl md:text-3xl font-bold uppercase mb-2">Đang tải dữ liệu...</h1>
-            <p class="opacity-90">Hệ thống thông tin Bầu cử nhiệm kỳ 2026 - 2031</p>
+    <header class="bg-blue-900 text-white py-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 id="headerTitle" class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-4">Đang tải hệ thống...</h1>
+            <div class="h-1 w-24 bg-red-500 mx-auto rounded-full mb-4"></div>
+            <p class="text-lg md:text-xl font-medium opacity-90">Ủy ban Bầu cử Xã Bình Hưng - Nhiệm kỳ 2026 - 2031</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
-        <div class="mb-6 max-w-xl mx-auto">
-            <div class="relative">
-                <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
-                <input type="text" id="searchInput" onkeyup="search()" placeholder="Tìm theo khu vực hoặc tên ấp..." 
-                    class="w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-red-500 outline-none">
+    <main class="container mx-auto px-4 -mt-8 relative z-20">
+        
+        <div id="feature-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             </div>
-        </div>
 
-        <div class="bg-white rounded-xl shadow overflow-hidden border">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            <div class="p-6 md:p-8 bg-slate-50 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <h2 class="text-2xl font-bold text-blue-900 flex items-center">
+                    <i class="fas fa-map-marked-alt mr-3"></i> Tra cứu 34 Khu vực bỏ phiếu
+                </h2>
+                <div class="relative w-full md:w-96">
+                    <i class="fas fa-search absolute left-4 top-4 text-slate-400"></i>
+                    <input type="text" id="search" onkeyup="doSearch()" placeholder="Tìm tên ấp hoặc địa điểm..." 
+                        class="w-full pl-12 pr-4 py-3.5 rounded-2xl border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-blue-500 shadow-inner outline-none transition">
+                </div>
+            </div>
+            
             <div class="overflow-x-auto">
-                <table class="min-w-full" id="dataTable">
-                    <thead class="bg-gray-100">
-                        <tr class="text-left text-xs font-bold uppercase tracking-wider text-gray-600">
-                            <th class="px-6 py-4 text-center">KVBP</th>
-                            <th class="px-6 py-4">Gồm Ấp</th>
-                            <th class="px-6 py-4">Địa điểm bỏ phiếu</th>
-                            <th class="px-6 py-4 text-right">Cử tri</th>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="text-slate-500 text-sm uppercase tracking-widest font-semibold bg-slate-50/50">
+                            <th class="p-5 border-b">Khu vực</th>
+                            <th class="p-5 border-b">Thông tin Ấp</th>
+                            <th class="p-5 border-b">Địa điểm bỏ phiếu</th>
+                            <th class="p-5 border-b text-right">Số cử tri</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200" id="dataRows">
+                    <tbody id="content" class="divide-y divide-slate-100">
                         </tbody>
                 </table>
             </div>
         </div>
     </main>
 
-    <script>
-        async function fetchData() {
-            const rows = document.getElementById('dataRows');
-            try {
-                // Thêm ./ để xác định đúng file cùng thư mục trên GitHub Pages
-                const response = await fetch('./data.json');
-                if (!response.ok) throw new Error('Không tìm thấy file data.json');
-                
-                const data = await response.json();
-                document.getElementById('title').innerText = data.tieu_de_trang;
+    <div id="infoModal" class="fixed inset-0 bg-slate-900/80 hidden items-center justify-center p-4 z-[100] backdrop-blur-sm">
+        <div class="bg-white rounded-[2.5rem] max-w-xl w-full p-8 md:p-10 shadow-2xl relative transform transition-all">
+            <button onclick="closeModal()" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-red-50 hover:text-red-500 transition-colors text-2xl">&times;</button>
+            <div id="modalBody"></div>
+            <button onclick="closeModal()" class="mt-10 w-full py-4 bg-blue-900 text-white rounded-2xl font-bold shadow-lg shadow-blue-900/20 hover:bg-blue-800 transition-all uppercase tracking-widest">Đã hiểu</button>
+        </div>
+    </div>
 
-                rows.innerHTML = data.danh_sach_khu_vuc.map(item => `
-                    <tr class="hover:bg-red-50 transition">
-                        <td class="px-6 py-4 text-center font-bold text-red-700">${item.khu_vuc_bo_phieu}</td>
-                        <td class="px-6 py-4 text-sm font-medium">${item.gom_ap}</td>
-                        <td class="px-6 py-4 text-sm italic text-gray-600">${item.dia_diem_bo_phieu}</td>
-                        <td class="px-6 py-4 text-right font-bold text-blue-600">${item.so_luong_cu_tri.toLocaleString('vi-VN')}</td>
+    <footer class="py-12 text-center text-slate-400 text-sm">
+        <p>© 2026 Ủy ban Bầu cử Xã Bình Hưng. Hệ thống phục vụ công tác tuyên truyền bầu cử.</p>
+    </footer>
+
+    <script>
+        let electionData = {};
+
+        async function init() {
+            try {
+                const res = await fetch('./data.json');
+                if (!res.ok) throw new Error("File data.json không tồn tại hoặc lỗi.");
+                electionData = await res.json();
+                
+                document.getElementById('headerTitle').innerText = electionData.tieu_de_trang;
+
+                // 1. Hiển thị 3 thẻ chức năng
+                const cardsHtml = electionData.cac_chuc_nang.map(item => `
+                    <div onclick="openModal('${item.id}')" class="card-hover cursor-pointer bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center space-x-5 transition-all">
+                        <div class="${item.mau} w-16 h-16 shrink-0 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-inner">
+                            <i class="fas ${item.icon} text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-slate-800 text-lg leading-tight">${item.tieu_de}</h3>
+                            <p class="text-sm text-slate-500 mt-1 line-clamp-2">${item.mo_ta}</p>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('feature-cards').innerHTML = cardsHtml;
+
+                // 2. Hiển thị bảng 34 khu vực
+                const tableHtml = electionData.danh_sach_khu_vuc.map(item => `
+                    <tr class="hover:bg-blue-50/50 transition">
+                        <td class="p-5 font-black text-blue-900 text-xl">#${item.khu_vuc}</td>
+                        <td class="p-5">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded-md">ẤP ${item.ap}</span>
+                        </td>
+                        <td class="p-5 text-sm font-medium text-slate-600 italic leading-relaxed">${item.dia_diem}</td>
+                        <td class="p-5 text-right font-black text-red-600 text-lg">${item.so_luong.toLocaleString('vi-VN')}</td>
                     </tr>
                 `).join('');
+                document.getElementById('content').innerHTML = tableHtml;
 
             } catch (err) {
-                console.error(err);
-                rows.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-red-500 font-bold">Lỗi: ${err.message}. <br> Hãy đảm bảo file data.json nằm cùng thư mục với index.html trên GitHub.</td></tr>`;
+                document.getElementById('content').innerHTML = `<tr><td colspan="4" class="p-20 text-center font-bold text-red-500"><i class="fas fa-exclamation-circle text-4xl mb-4"></i><br>LỖI: ${err.message}</td></tr>`;
             }
         }
 
-        function search() {
-            let input = document.getElementById("searchInput").value.toUpperCase();
-            let tr = document.getElementById("dataRows").getElementsByTagName("tr");
-            for (let i = 0; i < tr.length; i++) {
-                tr[i].style.display = tr[i].innerText.toUpperCase().includes(input) ? "" : "none";
-            }
+        function openModal(id) {
+            const info = electionData.cac_chuc_nang.find(f => f.id === id);
+            const modal = document.getElementById('infoModal');
+            document.getElementById('modalBody').innerHTML = `
+                <div class="${info.mau} w-20 h-20 rounded-[1.5rem] flex items-center justify-center text-white text-4xl mb-8 shadow-xl shadow-inner">
+                    <i class="fas ${info.icon}"></i>
+                </div>
+                <h2 class="text-3xl font-black text-slate-800 mb-6 uppercase tracking-tight">${info.tieu_de}</h2>
+                <div class="text-slate-600 leading-relaxed text-lg font-medium space-y-4">
+                    ${info.noi_dung_chi_tiet}
+                </div>
+            `;
+            modal.classList.add('modal-active');
         }
 
-        window.onload = fetchData;
+        function closeModal() {
+            document.getElementById('infoModal').classList.remove('modal-active');
+        }
+
+        function doSearch() {
+            const q = document.getElementById('search').value.toLowerCase();
+            const trs = document.querySelectorAll('#content tr');
+            trs.forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
+        }
+
+        window.onload = init;
     </script>
 </body>
 </html>
