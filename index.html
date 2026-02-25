@@ -6,122 +6,78 @@
     <title>Tra cứu Khu vực bỏ phiếu Xã Bình Hưng</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-header { background: linear-gradient(135deg, #1e3a8a 0%, #ef4444 100%); }
-        .table-container { max-height: 70vh; overflow-y: auto; }
-    </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-gray-50 text-gray-900">
 
-    <header class="gradient-header text-white py-10 shadow-lg mb-8">
+    <header class="bg-red-700 text-white py-8 shadow-md">
         <div class="container mx-auto px-4 text-center">
-            <h1 id="main-title" class="text-2xl md:text-4xl font-extrabold uppercase mb-2 tracking-wide">
-                Đang tải dữ liệu...
-            </h1>
-            <p class="text-lg opacity-90 font-medium">Hệ thống tra cứu thông tin bầu cử nhiệm kỳ 2026 - 2031</p>
+            <h1 id="title" class="text-2xl md:text-3xl font-bold uppercase mb-2">Đang tải dữ liệu...</h1>
+            <p class="opacity-90">Hệ thống thông tin Bầu cử nhiệm kỳ 2026 - 2031</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 pb-12">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div class="relative w-full md:w-1/2">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
-                    <i class="fas fa-search"></i>
-                </span>
-                <input type="text" id="searchInput" onkeyup="filterTable()" 
-                    placeholder="Tìm theo số khu vực, tên ấp hoặc địa điểm..." 
-                    class="block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm transition">
-            </div>
-            <div class="text-slate-500 text-sm font-medium">
-                Hiển thị: <span id="count-result" class="text-blue-600 font-bold">0</span> / 34 khu vực
+    <main class="container mx-auto px-4 py-8">
+        <div class="mb-6 max-w-xl mx-auto">
+            <div class="relative">
+                <i class="fas fa-search absolute left-3 top-3.5 text-gray-400"></i>
+                <input type="text" id="searchInput" onkeyup="search()" placeholder="Tìm theo khu vực hoặc tên ấp..." 
+                    class="w-full pl-10 pr-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-red-500 outline-none">
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-xl border overflow-hidden">
-            <div class="table-container">
-                <table class="min-w-full leading-normal" id="mainTable">
-                    <thead>
-                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-600 uppercase text-xs font-bold tracking-wider">
-                            <th class="px-5 py-4 text-center">KVBP</th>
-                            <th class="px-5 py-4 text-center">Đơn vị</th>
-                            <th class="px-5 py-4 text-left">Gồm các Ấp</th>
-                            <th class="px-5 py-4 text-left">Địa điểm bỏ phiếu</th>
-                            <th class="px-5 py-4 text-right">Cử tri</th>
+        <div class="bg-white rounded-xl shadow overflow-hidden border">
+            <div class="overflow-x-auto">
+                <table class="min-w-full" id="dataTable">
+                    <thead class="bg-gray-100">
+                        <tr class="text-left text-xs font-bold uppercase tracking-wider text-gray-600">
+                            <th class="px-6 py-4 text-center">KVBP</th>
+                            <th class="px-6 py-4">Gồm Ấp</th>
+                            <th class="px-6 py-4">Địa điểm bỏ phiếu</th>
+                            <th class="px-6 py-4 text-right">Cử tri</th>
                         </tr>
                     </thead>
-                    <tbody id="station-data" class="divide-y divide-slate-100">
+                    <tbody class="divide-y divide-gray-200" id="dataRows">
                         </tbody>
                 </table>
             </div>
         </div>
     </main>
 
-    <footer class="text-center py-8 text-slate-400 text-sm">
-        <p>© 2026 Ủy ban Bầu cử Xã Bình Hưng. Hệ thống phục vụ công tác tuyên truyền.</p>
-    </footer>
-
     <script>
-        // Hàm load dữ liệu từ data.json
-        async function loadData() {
+        async function fetchData() {
+            const rows = document.getElementById('dataRows');
             try {
-                const response = await fetch('data.json');
+                // Thêm ./ để xác định đúng file cùng thư mục trên GitHub Pages
+                const response = await fetch('./data.json');
+                if (!response.ok) throw new Error('Không tìm thấy file data.json');
+                
                 const data = await response.json();
-                
-                // Cập nhật tiêu đề từ JSON
-                document.getElementById('main-title').innerText = data.tieu_de_trang;
-                
-                const tbody = document.getElementById('station-data');
-                tbody.innerHTML = ''; // Xóa nội dung cũ
+                document.getElementById('title').innerText = data.tieu_de_trang;
 
-                data.danh_sach_khu_vuc.forEach(item => {
-                    const row = `
-                        <tr class="hover:bg-blue-50/50 transition duration-150">
-                            <td class="px-5 py-5 text-center">
-                                <span class="inline-block bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full text-sm">
-                                    ${item.khu_vuc_bo_phieu}
-                                </span>
-                            </td>
-                            <td class="px-5 py-5 text-center font-medium">${item.don_vi_bau_cu}</td>
-                            <td class="px-5 py-5 text-sm">${item.gom_ap}</td>
-                            <td class="px-5 py-5 text-sm italic text-slate-600">${item.dia_diem_bo_phieu}</td>
-                            <td class="px-5 py-5 text-right font-bold text-blue-600">
-                                ${item.so_luong_cu_tri.toLocaleString('vi-VN')}
-                            </td>
-                        </tr>
-                    `;
-                    tbody.insertAdjacentHTML('beforeend', row);
-                });
+                rows.innerHTML = data.danh_sach_khu_vuc.map(item => `
+                    <tr class="hover:bg-red-50 transition">
+                        <td class="px-6 py-4 text-center font-bold text-red-700">${item.khu_vuc_bo_phieu}</td>
+                        <td class="px-6 py-4 text-sm font-medium">${item.gom_ap}</td>
+                        <td class="px-6 py-4 text-sm italic text-gray-600">${item.dia_diem_bo_phieu}</td>
+                        <td class="px-6 py-4 text-right font-bold text-blue-600">${item.so_luong_cu_tri.toLocaleString('vi-VN')}</td>
+                    </tr>
+                `).join('');
 
-                document.getElementById('count-result').innerText = data.danh_sach_khu_vuc.length;
-
-            } catch (error) {
-                console.error('Lỗi tải dữ liệu:', error);
-                document.getElementById('main-title').innerText = "Lỗi tải dữ liệu!";
+            } catch (err) {
+                console.error(err);
+                rows.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-red-500 font-bold">Lỗi: ${err.message}. <br> Hãy đảm bảo file data.json nằm cùng thư mục với index.html trên GitHub.</td></tr>`;
             }
         }
 
-        // Hàm tìm kiếm nhanh
-        function filterTable() {
-            const input = document.getElementById("searchInput").value.toUpperCase();
-            const rows = document.querySelector("#station-data").getElementsByTagName("tr");
-            let count = 0;
-
-            for (let i = 0; i < rows.length; i++) {
-                const text = rows[i].textContent || rows[i].innerText;
-                if (text.toUpperCase().indexOf(input) > -1) {
-                    rows[i].style.display = "";
-                    count++;
-                } else {
-                    rows[i].style.display = "none";
-                }
+        function search() {
+            let input = document.getElementById("searchInput").value.toUpperCase();
+            let tr = document.getElementById("dataRows").getElementsByTagName("tr");
+            for (let i = 0; i < tr.length; i++) {
+                tr[i].style.display = tr[i].innerText.toUpperCase().includes(input) ? "" : "none";
             }
-            document.getElementById('count-result').innerText = count;
         }
 
-        // Chạy hàm khi web sẵn sàng
-        window.onload = loadData;
+        window.onload = fetchData;
     </script>
 </body>
 </html>
