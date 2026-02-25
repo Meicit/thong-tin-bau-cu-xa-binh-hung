@@ -3,46 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cổng Bầu Cử Xã Bình Hưng 2026</title>
+    <title>Bầu Cử Xã Bình Hưng 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .card-hover:hover { transform: translateY(-5px); transition: 0.3s ease-out; }
+        .card-hover:hover { transform: translateY(-5px); transition: 0.3s ease; }
         .modal-active { display: flex !important; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        /* Style cho phóng to ảnh */
-        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; cursor: zoom-out; }
-        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; cursor: zoom-out; }
+        #lightbox img { max-width: 90%; max-height: 90%; border: 4px solid white; border-radius: 8px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
     <div id="lightbox" onclick="this.style.display='none'">
-        <img id="lightbox-img" src="" alt="Phóng to">
+        <img id="lightbox-img" src="">
     </div>
 
     <header class="bg-blue-900 text-white py-12 text-center shadow-lg">
         <h1 id="headerTitle" class="text-3xl md:text-4xl font-black uppercase">Đang tải...</h1>
-        <p class="mt-2 opacity-80 italic">Thông tin phục vụ cử tri xã Bình Hưng - Nhiệm kỳ 2026-2031</p>
+        <p class="mt-2 opacity-80 italic">Hệ thống thông tin bầu cử xã Bình Hưng</p>
     </header>
 
     <main class="container mx-auto px-4 py-8">
         <div id="feature-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"></div>
 
-        <div class="bg-white rounded-[2rem] shadow-xl p-8 border border-slate-200">
-            <h2 class="text-xl font-bold mb-6 text-blue-900 uppercase">
-                <i class="fas fa-map-marker-alt mr-2"></i> 34 Khu vực bỏ phiếu
-            </h2>
+        <div class="bg-white rounded-[2rem] shadow-xl p-6 border border-slate-200">
+            <h2 class="text-xl font-bold mb-4 text-blue-900 uppercase"><i class="fas fa-search-location mr-2"></i> Tra cứu Khu vực bỏ phiếu</h2>
             <input type="text" id="search" onkeyup="doSearch()" placeholder="Tìm tên ấp hoặc địa điểm..." 
-                class="w-full p-4 border rounded-2xl mb-6 bg-slate-100 outline-none focus:ring-2 focus:ring-blue-500">
-            
+                class="w-full p-4 border rounded-2xl mb-6 bg-slate-50 outline-none focus:ring-2 focus:ring-blue-500">
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-50 text-slate-500 text-xs font-bold uppercase">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
                         <tr>
                             <th class="p-4 border-b">KVBP</th>
-                            <th class="p-4 border-b">Ấp</th>
-                            <th class="p-4 border-b">Địa điểm bỏ phiếu</th>
+                            <th class="p-4 border-b text-center">Ấp</th>
+                            <th class="p-4 border-b">Địa điểm</th>
                             <th class="p-4 border-b text-right">Số cử tri</th>
                         </tr>
                     </thead>
@@ -53,8 +49,8 @@
     </main>
 
     <div id="infoModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50 backdrop-blur-sm">
-        <div class="bg-white rounded-[2.5rem] max-w-7xl w-full max-h-[90vh] overflow-y-auto p-10 shadow-2xl relative">
-            <button onclick="closeModal()" class="sticky top-0 float-right text-4xl text-slate-400 hover:text-red-500 z-10">&times;</button>
+        <div class="bg-white rounded-[2.5rem] max-w-7xl w-full max-h-[90vh] overflow-y-auto p-8 shadow-2xl relative">
+            <button onclick="closeModal()" class="sticky top-0 float-right text-4xl text-slate-400 hover:text-red-500 transition z-10">&times;</button>
             <div id="modalTitle" class="mb-10 text-center"></div>
             <div id="candidateList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"></div>
         </div>
@@ -63,12 +59,9 @@
     <script>
         let globalData = {};
 
-        // Hàm phóng to hình ảnh
         function zoomImage(src) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lightbox.style.display = 'flex';
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
         }
 
         async function init() {
@@ -77,24 +70,22 @@
                 globalData = await res.json();
                 document.getElementById('headerTitle').innerText = globalData.tieu_de_trang;
 
-                // Đổ 3 thẻ đầu trang
                 document.getElementById('feature-cards').innerHTML = globalData.cac_chuc_nang.map(item => `
                     <div onclick="openModal('${item.id}')" class="card-hover cursor-pointer bg-white p-6 rounded-2xl border flex items-center space-x-4 shadow-sm border-slate-200">
-                        <div class="${item.mau} text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"><i class="fas ${item.icon} text-xl"></i></div>
-                        <h3 class="font-bold text-xs uppercase text-slate-700 leading-tight">${item.tieu_de}</h3>
+                        <div class="${item.mau} text-white w-14 h-14 rounded-xl flex items-center justify-center shadow-lg"><i class="fas ${item.icon} text-xl"></i></div>
+                        <h3 class="font-bold text-xs uppercase leading-tight text-slate-700">${item.tieu_de}</h3>
                     </div>
                 `).join('');
 
-                // Đổ bảng 34 khu vực
                 document.getElementById('content').innerHTML = globalData.danh_sach_khu_vuc.map(item => `
-                    <tr class="hover:bg-slate-50 transition border-b">
-                        <td class="p-4 font-black text-blue-900 text-lg">#${item.khu_vuc}</td>
-                        <td class="p-4 text-sm font-semibold">Ấp ${item.ap}</td>
+                    <tr class="border-b hover:bg-slate-50">
+                        <td class="p-4 font-bold text-blue-900 text-lg">#${item.khu_vuc}</td>
+                        <td class="p-4 text-sm font-semibold text-center">${item.ap}</td>
                         <td class="p-4 text-sm italic text-slate-500">${item.dia_diem}</td>
                         <td class="p-4 text-sm font-black text-right text-red-600">${item.so_luong.toLocaleString('vi-VN')}</td>
                     </tr>
                 `).join('');
-            } catch (err) { console.error("Lỗi:", err); }
+            } catch (err) { console.error(err); }
         }
 
         function openModal(id) {
@@ -102,23 +93,21 @@
             const listContainer = document.getElementById('candidateList');
             const titleContainer = document.getElementById('modalTitle');
 
-            titleContainer.innerHTML = `<h2 class="text-3xl font-black uppercase text-blue-900">${feature.tieu_de}</h2><p class="text-slate-500 mt-2">${feature.mo_ta}</p>`;
+            titleContainer.innerHTML = `<h2 class="text-2xl font-black uppercase text-blue-900 mb-2">${feature.tieu_de}</h2><p class="text-slate-500">${feature.mo_ta}</p><div class="w-16 h-1 bg-red-600 mx-auto mt-4"></div>`;
             
             if (!feature.ds_ung_vien || feature.ds_ung_vien.length === 0) {
                 listContainer.innerHTML = `<p class="col-span-full text-center py-20 text-slate-400 italic">Dữ liệu đang được cập nhật...</p>`;
             } else {
                 listContainer.innerHTML = feature.ds_ung_vien.map(uv => `
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition hover:scale-105">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 hover:shadow-xl transition duration-300">
                         <div class="aspect-[3/4] bg-slate-200 relative group cursor-zoom-in" onclick="zoomImage('${uv.anh}')">
-                            <img src="${uv.anh}" onerror="this.src='https://via.placeholder.com/300x400?text=Anh+Ứng+Viên'" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-                                <i class="fas fa-search-plus text-white text-2xl"></i>
-                            </div>
+                            <img src="${uv.anh}" onerror="this.src='https://via.placeholder.com/300x400?text=Chưa+có+ảnh'" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition"><i class="fas fa-search-plus text-white text-2xl"></i></div>
                         </div>
                         <div class="p-5 text-center">
-                            <h4 class="font-black text-blue-950 uppercase text-sm mb-2">${uv.ten}</h4>
-                            <p class="text-[10px] text-red-600 font-bold uppercase border-b pb-2 mb-2">${uv.chuc_vu}</p>
-                            <p class="text-[9px] text-slate-400">${uv.don_vi}</p>
+                            <h4 class="font-black text-blue-950 uppercase text-sm mb-1">${uv.ten}</h4>
+                            <p class="text-[10px] text-red-600 font-bold uppercase tracking-widest">${uv.chuc_vu}</p>
+                            <p class="text-[9px] text-slate-400 mt-2 border-t pt-2">${uv.don_vi}</p>
                         </div>
                     </div>
                 `).join('');
