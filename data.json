@@ -1,122 +1,65 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bầu Cử Xã Bình Hưng</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .card-hover { transition: all 0.3s ease; border: 1px solid #e2e8f0; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); border-color: #3b82f6; }
-        .modal-active { display: flex !important; }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-900">
-
-    <header class="bg-blue-900 text-white py-14 text-center shadow-lg mb-10">
-        <h1 id="headerTitle" class="text-3xl md:text-4xl font-black uppercase tracking-tight">Cổng thông tin bầu cử</h1>
-        <div class="w-20 h-1 bg-red-600 mx-auto mt-4 rounded-full"></div>
-    </header>
-
-    <main class="container mx-auto px-4 max-w-6xl">
-        <div id="feature-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"></div>
-
-        <div class="bg-white rounded-3xl shadow-xl p-8 border border-slate-200">
-            <h2 class="text-2xl font-bold mb-8 text-blue-900 flex items-center">
-                <i class="fas fa-search-location mr-3"></i> Tra cứu Khu vực bỏ phiếu
-            </h2>
-            <input type="text" id="search" onkeyup="doSearch()" placeholder="Nhập tên ấp hoặc địa điểm bỏ phiếu..." 
-                class="w-full p-5 border-none bg-slate-100 rounded-2xl mb-8 focus:ring-2 focus:ring-blue-500 outline-none shadow-inner">
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="text-slate-400 text-xs uppercase font-bold tracking-widest">
-                            <th class="p-4 border-b">Khu vực</th>
-                            <th class="p-4 border-b">Thông tin Ấp</th>
-                            <th class="p-4 border-b">Địa điểm</th>
-                            <th class="p-4 border-b text-right">Cử tri</th>
-                        </tr>
-                    </thead>
-                    <tbody id="content" class="divide-y divide-slate-100"></tbody>
-                </table>
-            </div>
-        </div>
-    </main>
-
-    <div id="infoModal" class="fixed inset-0 bg-slate-900/60 hidden items-center justify-center p-4 z-50 backdrop-blur-sm">
-        <div class="bg-white rounded-[2rem] max-w-2xl w-full p-10 shadow-2xl relative">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-3xl text-slate-300 hover:text-red-500">&times;</button>
-            <div id="modalBody"></div>
-            <button onclick="closeModal()" class="mt-10 w-full py-4 bg-blue-900 text-white rounded-2xl font-bold uppercase tracking-widest hover:bg-blue-800">Quay lại trang chủ</button>
-        </div>
-    </div>
-
-    <footer class="py-16 text-center text-slate-400 text-sm">
-        <p>© 2026 Ủy ban Bầu cử Xã Bình Hưng. Hệ thống tra cứu thông tin điện tử.</p>
-    </footer>
-
-    <script>
-        let electionData = {};
-
-        async function init() {
-            try {
-                const res = await fetch('./data.json?v=' + Date.now());
-                if (!res.ok) throw new Error("Lỗi tải dữ liệu");
-                electionData = await res.json();
-                
-                document.getElementById('headerTitle').innerText = electionData.tieu_de_trang;
-
-                // Hiển thị 3 thẻ chức năng
-                document.getElementById('feature-cards').innerHTML = electionData.cac_chuc_nang.map(item => `
-                    <div onclick="openModal('${item.id}')" class="card-hover cursor-pointer bg-white p-6 rounded-2xl flex flex-col items-center text-center">
-                        <div class="${item.mau} text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg mb-4">
-                            <i class="fas ${item.icon} text-2xl"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-800 text-sm leading-tight mb-2 uppercase">${item.tieu_de}</h3>
-                        <p class="text-[11px] text-slate-400 font-medium">${item.mo_ta}</p>
-                    </div>
-                `).join('');
-
-                // Hiển thị danh sách khu vực
-                document.getElementById('content').innerHTML = electionData.danh_sach_khu_vuc.map(item => `
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="p-5 font-bold text-blue-900 text-lg">#${item.khu_vuc}</td>
-                        <td class="p-5 text-sm font-semibold text-slate-700">Ấp ${item.ap}</td>
-                        <td class="p-5 text-sm italic text-slate-500">${item.dia_diem}</td>
-                        <td class="p-5 text-sm font-black text-right text-red-600">${item.so_luong.toLocaleString('vi-VN')}</td>
-                    </tr>
-                `).join('');
-
-            } catch (err) {
-                console.error(err);
-                document.body.innerHTML = `<div class="p-20 text-center text-red-600 font-bold">LỖI HỆ THỐNG: ${err.message}</div>`;
-            }
-        }
-
-        function openModal(id) {
-            const item = electionData.cac_chuc_nang.find(x => x.id === id);
-            document.getElementById('modalBody').innerHTML = `
-                <div class="${item.mau} w-20 h-20 rounded-2xl flex items-center justify-center text-white text-4xl mb-6 shadow-xl">
-                    <i class="fas ${item.icon}"></i>
-                </div>
-                <div class="prose prose-slate max-w-none">
-                    ${item.noi_dung_chi_tiet}
-                </div>
-            `;
-            document.getElementById('infoModal').classList.add('modal-active');
-        }
-
-        function closeModal() { document.getElementById('infoModal').classList.remove('modal-active'); }
-
-        function doSearch() {
-            const q = document.getElementById('search').value.toLowerCase();
-            const tr = document.querySelectorAll('#content tr');
-            tr.forEach(r => r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none');
-        }
-
-        window.onload = init;
-    </script>
-</body>
-</html>
+{
+  "tieu_de_trang": "TRA CỨU THÔNG TIN BẦU CỬ XÃ BÌNH HƯNG 2026",
+  "cac_chuc_nang": [
+    {
+      "id": "dv-quoc-hoi",
+      "tieu_de": "Ứng cử viên Quốc hội",
+      "mo_ta": "Đại biểu Quốc hội khóa XVI nhiệm kỳ 2026 - 2031",
+      "icon": "fa-landmark",
+      "mau": "bg-red-700",
+      "noi_dung_chi_tiet": "<h3 class='font-bold text-red-700 mb-2'>DANH SÁCH ỨNG CỬ VIÊN ĐẠI BIỂU QUỐC HỘI KHÓA XVI</h3><p>Nhiệm kỳ 2026 - 2031</p><hr class='my-2'><p>Danh sách đang được cập nhật niêm yết theo quy định của Hội đồng bầu cử quốc gia...</p>"
+    },
+    {
+      "id": "dv-thanh-pho",
+      "tieu_de": "Ứng cử viên Thành phố",
+      "mo_ta": "Đại biểu HĐND TP. Hồ Chí Minh nhiệm kỳ 2026 - 2031",
+      "icon": "fa-city",
+      "mau": "bg-blue-800",
+      "noi_dung_chi_tiet": "<h3 class='font-bold text-blue-800 mb-2'>DANH SÁCH ỨNG CỬ VIÊN ĐẠI BIỂU HĐND TP. HỒ CHÍ MINH</h3><p>Nhiệm kỳ 2026 - 2031</p><hr class='my-2'><p>Thông tin chi tiết về tiểu sử và chương trình hành động của các ứng cử viên cấp Thành phố...</p>"
+    },
+    {
+      "id": "dv-xa",
+      "tieu_de": "Ứng cử viên cấp Xã",
+      "mo_ta": "Đại biểu HĐND Xã Bình Hưng nhiệm kỳ 2026 - 2031",
+      "icon": "fa-users",
+      "mau": "bg-emerald-700",
+      "noi_dung_chi_tiet": "<h3 class='font-bold text-emerald-700 mb-2'>DANH SÁCH ỨNG CỬ VIÊN ĐẠI BIỂU HĐND XÃ BÌNH HƯNG</h3><p>Nhiệm kỳ 2026 - 2031</p><hr class='my-2'><p>Tiểu sử tóm tắt và chương trình hành động của các ứng cử viên tại địa phương xã Bình Hưng...</p>"
+    }
+  ],
+  "danh_sach_khu_vuc": [
+    {"stt":1,"khu_vuc":"01","ap":"1, 3","so_luong":2914,"dia_diem":"Trường Mầm non Tuệ Đức, số 2 đường số 16, KDC Bình Hưng, ấp 3"},
+    {"stt":2,"khu_vuc":"02","ap":"2","so_luong":1693,"dia_diem":"Trường Mầm non Thủy Tiên cũ, kế Trụ sở UBND xã Bình Hưng"},
+    {"stt":3,"khu_vuc":"03","ap":"4","so_luong":1262,"dia_diem":"Văn phòng ấp 2-4, địa chỉ số A10/9A đường số 10A ấp 4"},
+    {"stt":4,"khu_vuc":"04","ap":"5, 70","so_luong":2908,"dia_diem":"Trường Tiểu học Bình Hưng, số 3, đường 10, KDC Bình Hưng, ấp 5"},
+    {"stt":5,"khu_vuc":"05","ap":"6, 7, 8","so_luong":3279,"dia_diem":"Trường THCS Nguyễn Thái Bình, đường số 2, KDC Bình Hưng, ấp 7"},
+    {"stt":6,"khu_vuc":"06","ap":"9, 10, 11","so_luong":3556,"dia_diem":"Văn phòng ấp liên ấp 19-25, 29, 30, địa chỉ 920 Văn Tiến Dũng, ấp 11"},
+    {"stt":7,"khu_vuc":"07","ap":"18, 20, 21","so_luong":2611,"dia_diem":"Nhà sinh hoạt cộng đồng Block C chung cư Ehomes, ấp 20"},
+    {"stt":8,"khu_vuc":"08","ap":"12","so_luong":1307,"dia_diem":"Nhà số 447/38/8, ấp 12 (Nhà ông Trần Thanh Hoàng)"},
+    {"stt":9,"khu_vuc":"09","ap":"13, 14","so_luong":3427,"dia_diem":"Văn phòng liên ấp 12, 13, 14, 15, số 475, Quốc lộ 50"},
+    {"stt":10,"khu_vuc":"10","ap":"15, 16","so_luong":3290,"dia_diem":"Nhà số A22/33A, ấp 16 (Nhà bà Lê Thị Hoàng Anh)"},
+    {"stt":11,"khu_vuc":"11","ap":"17, 27","so_luong":2097,"dia_diem":"Văn phòng ấp 17, 27"},
+    {"stt":12,"khu_vuc":"12","ap":"19, 23","so_luong":1294,"dia_diem":"Văn phòng ấp 19 - Số 1 đường số 2 KDC Nguyên Sơn"},
+    {"stt":13,"khu_vuc":"13","ap":"22, 24, 25","so_luong":1316,"dia_diem":"Nhà sinh hoạt cộng đồng MP7 Mizuki"},
+    {"stt":14,"khu_vuc":"14","ap":"26, 28","so_luong":2450,"dia_diem":"Miễu Dừa Dăng, địa chỉ A34/12DL1, ấp 26"},
+    {"stt":15,"khu_vuc":"15","ap":"29, 30","so_luong":2277,"dia_diem":"Câu lạc bộ Taekwondo Mizuki, địa chỉ B18/22R ấp 29"},
+    {"stt":16,"khu_vuc":"16","ap":"31, 32, 33","so_luong":2348,"dia_diem":"Văn phòng ấp 31, 32, 33, 34, 35, số C3/12B Phạm Hùng"},
+    {"stt":17,"khu_vuc":"17","ap":"34, 35","so_luong":2827,"dia_diem":"Quán ẩm thực Bình Xuyên, số C3/17 Phạm Hùng, ấp 35"},
+    {"stt":18,"khu_vuc":"18","ap":"36, 37","so_luong":641,"dia_diem":"Văn phòng ấp 36, 37"},
+    {"stt":19,"khu_vuc":"19","ap":"38, 45","so_luong":1823,"dia_diem":"Trường Tiểu học Phạm Hùng, đường 6A, KDC Đại Phúc"},
+    {"stt":20,"khu_vuc":"20","ap":"46, 47","so_luong":1240,"dia_diem":"Số 1 đường số 14, KDC Him Lam 6A"},
+    {"stt":21,"khu_vuc":"21","ap":"48, 49, 50","so_luong":3178,"dia_diem":"Văn phòng ấp 50, số 23 đường số 7, KDC Trung Sơn"},
+    {"stt":22,"khu_vuc":"22","ap":"39, 40","so_luong":2168,"dia_diem":"Văn phòng liên ấp 39-43, số 14 đường 15 KDC Him Lam"},
+    {"stt":23,"khu_vuc":"23","ap":"41, 42, 43","so_luong":2854,"dia_diem":"Điểm sinh hoạt văn hóa ấp 43, địa chỉ C7C/18H1"},
+    {"stt":24,"khu_vuc":"24","ap":"44","so_luong":1851,"dia_diem":"Văn phòng ấp 44-45, địa chỉ C13/QV58 đường Nguyễn Văn Linh"},
+    {"stt":25,"khu_vuc":"25","ap":"51, 52","so_luong":2763,"dia_diem":"Văn phòng ấp 51, 52, 53"},
+    {"stt":26,"khu_vuc":"26","ap":"53, 54","so_luong":2571,"dia_diem":"Văn phòng ấp 54, 55, số 1873 đường Văn Tiến Dũng"},
+    {"stt":27,"khu_vuc":"27","ap":"55, 56","so_luong":2735,"dia_diem":"Trường Tiểu học Phong Phú 2, KDC Phong Phú 4"},
+    {"stt":28,"khu_vuc":"28","ap":"57","so_luong":2181,"dia_diem":"Văn phòng ấp 57 đường số 19 KDC Phong Phú 4"},
+    {"stt":29,"khu_vuc":"29","ap":"58, 59","so_luong":1994,"dia_diem":"Văn phòng ấp 58, 59, số 1758 đường Văn Tiến Dũng"},
+    {"stt":30,"khu_vuc":"30","ap":"60, 61, 62","so_luong":3196,"dia_diem":"Trụ sở UBND xã Phong Phú cũ, số 294 Trịnh Quang Nghị"},
+    {"stt":31,"khu_vuc":"31","ap":"64, 65","so_luong":2557,"dia_diem":"Trung tâm học tập cộng đồng, 1511 đường Văn Tiến Dũng"},
+    {"stt":32,"khu_vuc":"32","ap":"63, 66","so_luong":2744,"dia_diem":"Văn phòng ấp 66, Công viên Gia Hòa đường số 3"},
+    {"stt":33,"khu_vuc":"33","ap":"67","so_luong":2244,"dia_diem":"Trường Tiểu học Lê Quý Đôn, Số 31 đường số 5, KDC 13E"},
+    {"stt":34,"khu_vuc":"34","ap":"68, 69","so_luong":2654,"dia_diem":"Chung cư Aview, số 1 đường Nguyễn Văn Linh, ấp 69"}
+  ]
+}
