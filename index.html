@@ -3,77 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bầu Cử Xã Bình Hưng 2026</title>
+    <title>Tra cứu Khu vực bỏ phiếu Xã Bình Hưng</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-header { background: linear-gradient(135deg, #1e3a8a 0%, #ef4444 100%); }
+        .table-container { max-height: 70vh; overflow-y: auto; }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-slate-50 text-slate-900">
 
-    <nav class="bg-red-700 text-white p-4 text-center font-bold text-xl">
-        HỆ THỐNG THÔNG TIN BẦU CỬ XÃ BÌNH HƯNG
-    </nav>
+    <header class="gradient-header text-white py-10 shadow-lg mb-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 id="main-title" class="text-2xl md:text-4xl font-extrabold uppercase mb-2 tracking-wide">
+                Đang tải dữ liệu...
+            </h1>
+            <p class="text-lg opacity-90 font-medium">Hệ thống tra cứu thông tin bầu cử nhiệm kỳ 2026 - 2031</p>
+        </div>
+    </header>
 
-    <div class="container mx-auto p-4">
-        <section class="mb-10">
-            <h2 class="text-xl font-bold mb-4">Danh sách Khu vực bỏ phiếu</h2>
-            <div class="overflow-x-auto bg-white shadow rounded-lg">
-                <table class="min-w-full" id="station-table">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="p-3 text-left">KVBP</th>
-                            <th class="p-3 text-left">Ấp</th>
-                            <th class="p-3 text-left">Địa điểm</th>
+    <main class="container mx-auto px-4 pb-12">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div class="relative w-full md:w-1/2">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" id="searchInput" onkeyup="filterTable()" 
+                    placeholder="Tìm theo số khu vực, tên ấp hoặc địa điểm..." 
+                    class="block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm transition">
+            </div>
+            <div class="text-slate-500 text-sm font-medium">
+                Hiển thị: <span id="count-result" class="text-blue-600 font-bold">0</span> / 34 khu vực
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl border overflow-hidden">
+            <div class="table-container">
+                <table class="min-w-full leading-normal" id="mainTable">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-600 uppercase text-xs font-bold tracking-wider">
+                            <th class="px-5 py-4 text-center">KVBP</th>
+                            <th class="px-5 py-4 text-center">Đơn vị</th>
+                            <th class="px-5 py-4 text-left">Gồm các Ấp</th>
+                            <th class="px-5 py-4 text-left">Địa điểm bỏ phiếu</th>
+                            <th class="px-5 py-4 text-right">Cử tri</th>
                         </tr>
                     </thead>
-                    <tbody id="station-list">
+                    <tbody id="station-data" class="divide-y divide-slate-100">
                         </tbody>
                 </table>
             </div>
-        </section>
+        </div>
+    </main>
 
-        <section>
-            <h2 class="text-xl font-bold mb-4">Danh sách Ứng cử viên</h2>
-            <div id="candidate-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                </div>
-        </section>
-    </div>
+    <footer class="text-center py-8 text-slate-400 text-sm">
+        <p>© 2026 Ủy ban Bầu cử Xã Bình Hưng. Hệ thống phục vụ công tác tuyên truyền.</p>
+    </footer>
 
     <script>
-        // Hàm lấy dữ liệu từ file JSON
+        // Hàm load dữ liệu từ data.json
         async function loadData() {
             try {
                 const response = await fetch('data.json');
                 const data = await response.json();
+                
+                // Cập nhật tiêu đề từ JSON
+                document.getElementById('main-title').innerText = data.tieu_de_trang;
+                
+                const tbody = document.getElementById('station-data');
+                tbody.innerHTML = ''; // Xóa nội dung cũ
 
-                // 1. Đổ dữ liệu vào bảng trạm bỏ phiếu
-                const stationList = document.getElementById('station-list');
-                data.stations.forEach(s => {
-                    stationList.innerHTML += `
-                        <tr class="border-t">
-                            <td class="p-3 font-bold">${s.id}</td>
-                            <td class="p-3">${s.ap}</td>
-                            <td class="p-3 text-sm">${s.address}</td>
+                data.danh_sach_khu_vuc.forEach(item => {
+                    const row = `
+                        <tr class="hover:bg-blue-50/50 transition duration-150">
+                            <td class="px-5 py-5 text-center">
+                                <span class="inline-block bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full text-sm">
+                                    ${item.khu_vuc_bo_phieu}
+                                </span>
+                            </td>
+                            <td class="px-5 py-5 text-center font-medium">${item.don_vi_bau_cu}</td>
+                            <td class="px-5 py-5 text-sm">${item.gom_ap}</td>
+                            <td class="px-5 py-5 text-sm italic text-slate-600">${item.dia_diem_bo_phieu}</td>
+                            <td class="px-5 py-5 text-right font-bold text-blue-600">
+                                ${item.so_luong_cu_tri.toLocaleString('vi-VN')}
+                            </td>
                         </tr>
                     `;
+                    tbody.insertAdjacentHTML('beforeend', row);
                 });
 
-                // 2. Đổ dữ liệu vào danh sách ứng cử viên
-                const candidateGrid = document.getElementById('candidate-grid');
-                data.candidates.forEach(c => {
-                    candidateGrid.innerHTML += `
-                        <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-600">
-                            <h3 class="font-bold text-lg uppercase">${c.name}</h3>
-                            <p class="text-sm text-gray-600">KVBP: ${c.kvbp}</p>
-                            <p class="mt-2 text-xs">${c.position}</p>
-                            <button class="mt-3 text-red-600 font-semibold text-sm">Xem chi tiết</button>
-                        </div>
-                    `;
-                });
+                document.getElementById('count-result').innerText = data.danh_sach_khu_vuc.length;
+
             } catch (error) {
-                console.error("Lỗi khi tải dữ liệu:", error);
+                console.error('Lỗi tải dữ liệu:', error);
+                document.getElementById('main-title').innerText = "Lỗi tải dữ liệu!";
             }
         }
 
-        // Chạy hàm khi trang web tải xong
+        // Hàm tìm kiếm nhanh
+        function filterTable() {
+            const input = document.getElementById("searchInput").value.toUpperCase();
+            const rows = document.querySelector("#station-data").getElementsByTagName("tr");
+            let count = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const text = rows[i].textContent || rows[i].innerText;
+                if (text.toUpperCase().indexOf(input) > -1) {
+                    rows[i].style.display = "";
+                    count++;
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+            document.getElementById('count-result').innerText = count;
+        }
+
+        // Chạy hàm khi web sẵn sàng
         window.onload = loadData;
     </script>
 </body>
