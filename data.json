@@ -1,246 +1,32 @@
 {
   "tieu_de_trang": "DANH SÁCH KHU VỰC BỎ PHIẾU XÃ BÌNH HƯNG",
   "danh_sach_khu_vuc": [
-    {
-      "stt": 1,
-      "don_vi_bau_cu": "01",
-      "khu_vuc_bo_phieu": "01",
-      "gom_ap": "1, 3",
-      "dien_tich": "21,88",
-      "so_luong_cu_tri": 2914,
-      "dia_diem_bo_phieu": "Trường Mầm non Tuệ Đức, địa chỉ số 2 đường số 16, KDC Bình Hưng, ấp 3"
-    },
-    {
-      "stt": 2,
-      "don_vi_bau_cu": "01",
-      "khu_vuc_bo_phieu": "02",
-      "gom_ap": "2",
-      "dien_tich": "4,84",
-      "so_luong_cu_tri": 1693,
-      "dia_diem_bo_phieu": "Trường Mầm non Thủy Tiên cũ, kế Trụ sở UBND xã Bình Hưng"
-    },
-    {
-      "stt": 3,
-      "don_vi_bau_cu": "01",
-      "khu_vuc_bo_phieu": "03",
-      "gom_ap": "4",
-      "dien_tich": "5,13",
-      "so_luong_cu_tri": 1262,
-      "dia_diem_bo_phieu": "Văn phòng ấp 2-4, địa chỉ số A10/9A đường số 10A ấp 4"
-    },
-    {
-      "stt": 4,
-      "don_vi_bau_cu": "02",
-      "khu_vuc_bo_phieu": "04",
-      "gom_ap": "5, 70",
-      "dien_tich": "160,79",
-      "so_luong_cu_tri": 2908,
-      "dia_diem_bo_phieu": "Trường Tiểu học Bình Hưng, địa chỉ: số 3, đường 10, KDC Bình Hưng, ấp 5."
-    },
-    {
-      "stt": 5,
-      "don_vi_bau_cu": "02",
-      "khu_vuc_bo_phieu": "05",
-      "gom_ap": "6, 7, 8",
-      "dien_tich": "68,18",
-      "so_luong_cu_tri": 3279,
-      "dia_diem_bo_phieu": "Trường THCS Nguyễn Thái Bình, địa chỉ: đường số 2, KDC Bình Hưng, ấp 7"
-    },
-    {
-      "stt": 6,
-      "don_vi_bau_cu": "03",
-      "khu_vuc_bo_phieu": "06",
-      "gom_ap": "9, 10, 11",
-      "dien_tich": "40,94",
-      "so_luong_cu_tri": 3556,
-      "dia_diem_bo_phieu": "Văn phòng ấp liên ấp 19-25,29,30, địa chỉ: 920 Văn Tiến Dũng, ấp 11"
-    },
-    {
-      "stt": 7,
-      "don_vi_bau_cu": "03",
-      "khu_vuc_bo_phieu": "07",
-      "gom_ap": "18, 20, 21",
-      "dien_tich": "45,22",
-      "so_luong_cu_tri": 2611,
-      "dia_diem_bo_phieu": "Nhà sinh hoạt cộng đồng Block C chung cư Ehomes, ấp 20"
-    },
-    {
-      "stt": 8,
-      "don_vi_bau_cu": "04",
-      "khu_vuc_bo_phieu": "08",
-      "gom_ap": "12",
-      "dien_tich": "9,97",
-      "so_luong_cu_tri": 1307,
-      "dia_diem_bo_phieu": "Nhà số 447/38/8, ấp 12, xã Bình Hưng (Nhà ông Trần Thanh Hoàng, Bí thư Chi bộ ấp 12)"
-    },
-    {
-      "stt": 9,
-      "don_vi_bau_cu": "04",
-      "khu_vuc_bo_phieu": "09",
-      "gom_ap": "13, 14",
-      "dien_tich": "14,33",
-      "so_luong_cu_tri": 3427,
-      "dia_diem_bo_phieu": "Văn phòng liên ấp 12, 13, 14, 15, địa chỉ số 475, Quốc lộ 50"
-    },
-    {
-      "stt": 10,
-      "don_vi_bau_cu": "04",
-      "khu_vuc_bo_phieu": "10",
-      "gom_ap": "15, 16",
-      "dien_tich": "14,44",
-      "so_luong_cu_tri": 3290,
-      "dia_diem_bo_phieu": "Nhà số A22/33A, ấp 16, xã Bình Hưng (Nhà bà Lê Thị Hoàng Anh)"
-    },
-    {
-      "stt": 11,
-      "don_vi_bau_cu": "05",
-      "khu_vuc_bo_phieu": "11",
-      "gom_ap": "17, 27",
-      "dien_tich": "55,8",
-      "so_luong_cu_tri": 2097,
-      "dia_diem_bo_phieu": "Văn phòng ấp 17, 27"
-    },
-    {
-      "stt": 12,
-      "don_vi_bau_cu": "05",
-      "khu_vuc_bo_phieu": "12",
-      "gom_ap": "19, 23",
-      "dien_tich": "55,66",
-      "so_luong_cu_tri": 1294,
-      "dia_diem_bo_phieu": "Văn phòng ấp 19 - Số 1 đường số 2 KDC Nguyên Sơn ấp 19"
-    },
-    {
-      "stt": 13,
-      "don_vi_bau_cu": "05",
-      "khu_vuc_bo_phieu": "13",
-      "gom_ap": "22, 24, 25",
-      "dien_tich": "17,77",
-      "so_luong_cu_tri": 1316,
-      "dia_diem_bo_phieu": "Nhà sinh hoạt cộng đồng MP7 Mizuki"
-    },
-    {
-      "stt": 14,
-      "don_vi_bau_cu": "05",
-      "khu_vuc_bo_phieu": "14",
-      "gom_ap": "26, 28",
-      "dien_tich": "51,19",
-      "so_luong_cu_tri": 2450,
-      "dia_diem_bo_phieu": "Miễu Dừa Dăng, địa chỉ: A34/12DL1, ấp 26"
-    },
-    {
-      "stt": 15,
-      "don_vi_bau_cu": "06",
-      "khu_vuc_bo_phieu": "15",
-      "gom_ap": "29, 30",
-      "dien_tich": "354,76",
-      "so_luong_cu_tri": 2277,
-      "dia_diem_bo_phieu": "Câu lạc bộ Taekwondo Mizuki, địa chỉ B18/22R ấp 29"
-    },
-    {
-      "stt": 16,
-      "don_vi_bau_cu": "06",
-      "khu_vuc_bo_phieu": "16",
-      "gom_ap": "31, 32, 33",
-      "dien_tich": "27,66",
-      "so_luong_cu_tri": 2348,
-      "dia_diem_bo_phieu": "Văn phòng ấp 31, 32, 33, 34, 35, địa chỉ: C3/12B, đường Phạm Hùng, ấp 34"
-    },
-    {
-      "stt": 17,
-      "don_vi_bau_cu": "06",
-      "khu_vuc_bo_phieu": "17",
-      "gom_ap": "34, 35",
-      "dien_tich": "40,18",
-      "so_luong_cu_tri": 2827,
-      "dia_diem_bo_phieu": "Mượn địa điểm Quán ẩm thực Bình Xuyên, địa chỉ: C3/17, đường Phạm Hùng, ấp 35"
-    },
-    {
-      "stt": 18,
-      "don_vi_bau_cu": "06",
-      "khu_vuc_bo_phieu": "18",
-      "gom_ap": "36, 37",
-      "dien_tich": "141,82",
-      "so_luong_cu_tri": 641,
-      "dia_diem_bo_phieu": "Văn phòng ấp 36, 37"
-    },
-    {
-      "stt": 19,
-      "don_vi_bau_cu": "07",
-      "khu_vuc_bo_phieu": "19",
-      "gom_ap": "38, 45",
-      "dien_tich": "106,28",
-      "so_luong_cu_tri": 1823,
-      "dia_diem_bo_phieu": "Trường Tiểu học Phạm Hùng, địa chỉ đường 6A, KDC Đại Phúc, ấp 38"
-    },
-    {
-      "stt": 20,
-      "don_vi_bau_cu": "07",
-      "khu_vuc_bo_phieu": "20",
-      "gom_ap": "46, 47",
-      "dien_tich": "48,16",
-      "so_luong_cu_tri": 1240,
-      "dia_diem_bo_phieu": "Số 1 đường số 14, KDC Him Lam 6A (Sảnh công ty Him Lam)"
-    },
-    {
-      "stt": 21,
-      "don_vi_bau_cu": "07",
-      "khu_vuc_bo_phieu": "21",
-      "gom_ap": "48, 49, 50",
-      "dien_tich": "108,87",
-      "so_luong_cu_tri": 3178,
-      "dia_diem_bo_phieu": "Văn phòng ấp 50, địa chỉ số 23, đường số 7, KDC Trung Sơn, ấp 50"
-    },
-    {
-      "stt": 22,
-      "don_vi_bau_cu": "08",
-      "khu_vuc_bo_phieu": "22",
-      "gom_ap": "39, 40",
-      "dien_tich": "23,94",
-      "so_luong_cu_tri": 2168,
-      "dia_diem_bo_phieu": "Văn phòng liên ấp 39, 40, 41, 42, 43, địa chỉ: số 14, đường số 15, ấp 40, KDC Him Lam"
-    },
-    {
-      "stt": 23,
-      "don_vi_bau_cu": "08",
-      "khu_vuc_bo_phieu": "23",
-      "gom_ap": "41, 42, 43",
-      "dien_tich": "55,19",
-      "so_luong_cu_tri": 2854,
-      "dia_diem_bo_phieu": "Điểm sinh hoạt văn hóa ấp 43, địa chỉ C7C/18H1, ấp 43"
-    },
-    {
-      "stt": 24,
-      "don_vi_bau_cu": "08",
-      "khu_vuc_bo_phieu": "24",
-      "gom_ap": "44",
-      "dien_tich": "45,4",
-      "so_luong_cu_tri": 1851,
-      "dia_diem_bo_phieu": "Văn phòng ấp 44 - 45, địa chỉ: C13/QV58 đường Nguyễn Văn Linh, ấp 44"
-    },
-    {
-      "stt": 25,
-      "don_vi_bau_cu": "09",
-      "khu_vuc_bo_phieu": "25",
-      "gom_ap": "51, 52",
-      "dien_tich": "42,51",
-      "so_luong_cu_tri": 2763,
-      "dia_diem_bo_phieu": "Văn phòng ấp 1 xã Phong Phú cũ (hiện là Văn phòng ấp 51, 52, 53)"
-    },
-    {
-      "stt": 26,
-      "don_vi_bau_cu": "09",
-      "khu_vuc_bo_phieu": "26",
-      "gom_ap": "53, 54",
-      "dien_tich": "537,12",
-      "so_luong_cu_tri": 2571,
-      "dia_diem_bo_phieu": "Văn phòng ấp 54, 55, số 1873 đường Văn Tiến Dũng"
-    },
-    {
-      "stt": 27,
-      "don_vi_bau_cu": "09",
-      "khu_vuc_bo_phieu": "27",
-      "gom_ap": "55, 56",
-      "dien_tich": "204,14",
-      "so_luong_cu_tri": 2735,
-      "dia_diem_bo_phieu": "Trường Tiểu học Phong Phú 2 đường D3 KDC Phong Phú 4"
-    },
+    {"stt": 1, "don_vi_bau_cu": "01", "khu_vuc_bo_phieu": "01", "gom_ap": "1, 3", "so_luong_cu_tri": 2914, "dia_diem_bo_phieu": "Trường Mầm non Tuệ Đức, địa chỉ số 2 đường số 16, KDC Bình Hưng, ấp 3"},
+    {"stt": 2, "don_vi_bau_cu": "01", "khu_vuc_bo_phieu": "02", "gom_ap": "2", "so_luong_cu_tri": 1693, "dia_diem_bo_phieu": "Trường Mầm non Thủy Tiên cũ, kế Trụ sở UBND xã Bình Hưng"},
+    {"stt": 3, "don_vi_bau_cu": "01", "khu_vuc_bo_phieu": "03", "gom_ap": "4", "so_luong_cu_tri": 1262, "dia_diem_bo_phieu": "Văn phòng ấp 2-4, địa chỉ số A10/9A đường số 10A ấp 4"},
+    {"stt": 4, "don_vi_bau_cu": "02", "khu_vuc_bo_phieu": "04", "gom_ap": "5, 70", "so_luong_cu_tri": 2908, "dia_diem_bo_phieu": "Trường Tiểu học Bình Hưng, địa chỉ: số 3, đường 10, KDC Bình Hưng, ấp 5."},
+    {"stt": 5, "don_vi_bau_cu": "02", "khu_vuc_bo_phieu": "05", "gom_ap": "6, 7, 8", "so_luong_cu_tri": 3279, "dia_diem_bo_phieu": "Trường THCS Nguyễn Thái Bình, địa chỉ: đường số 2, KDC Bình Hưng, ấp 7"},
+    {"stt": 6, "don_vi_bau_cu": "03", "khu_vuc_bo_phieu": "06", "gom_ap": "9, 10, 11", "so_luong_cu_tri": 3556, "dia_diem_bo_phieu": "Văn phòng ấp liên ấp 19-25,29,30, địa chỉ: 920 Văn Tiến Dũng, ấp 11"},
+    {"stt": 7, "don_vi_bau_cu": "03", "khu_vuc_bo_phieu": "07", "gom_ap": "18, 20, 21", "so_luong_cu_tri": 2611, "dia_diem_bo_phieu": "Nhà sinh hoạt cộng đồng Block C chung cư Ehomes, ấp 20"},
+    {"stt": 8, "don_vi_bau_cu": "04", "khu_vuc_bo_phieu": "08", "gom_ap": "12", "so_luong_cu_tri": 1307, "dia_diem_bo_phieu": "Nhà số 447/38/8, ấp 12, xã Bình Hưng (Nhà ông Trần Thanh Hoàng)"},
+    {"stt": 9, "don_vi_bau_cu": "04", "khu_vuc_bo_phieu": "09", "gom_ap": "13, 14", "so_luong_cu_tri": 3427, "dia_diem_bo_phieu": "Văn phòng liên ấp 12, 13, 14, 15, địa chỉ số 475, Quốc lộ 50"},
+    {"stt": 10, "don_vi_bau_cu": "04", "khu_vuc_bo_phieu": "10", "gom_ap": "15, 16", "so_luong_cu_tri": 3290, "dia_diem_bo_phieu": "Nhà số A22/33A, ấp 16, xã Bình Hưng (Nhà bà Lê Thị Hoàng Anh)"},
+    {"stt": 11, "don_vi_bau_cu": "05", "khu_vuc_bo_phieu": "11", "gom_ap": "17, 27", "so_luong_cu_tri": 2097, "dia_diem_bo_phieu": "Văn phòng ấp 17, 27"},
+    {"stt": 12, "don_vi_bau_cu": "05", "khu_vuc_bo_phieu": "12", "gom_ap": "19, 23", "so_luong_cu_tri": 1294, "dia_diem_bo_phieu": "Văn phòng ấp 19 - Số 1 đường số 2 KDC Nguyên Sơn ấp 19"},
+    {"stt": 13, "don_vi_bau_cu": "05", "khu_vuc_bo_phieu": "13", "gom_ap": "22, 24, 25", "so_luong_cu_tri": 1316, "dia_diem_bo_phieu": "Nhà sinh hoạt cộng đồng MP7 Mizuki"},
+    {"stt": 14, "don_vi_bau_cu": "05", "khu_vuc_bo_phieu": "14", "gom_ap": "26, 28", "so_luong_cu_tri": 2450, "dia_diem_bo_phieu": "Miễu Dừa Dăng, địa chỉ: A34/12DL1, ấp 26"},
+    {"stt": 15, "don_vi_bau_cu": "06", "khu_vuc_bo_phieu": "15", "gom_ap": "29, 30", "so_luong_cu_tri": 2277, "dia_diem_bo_phieu": "Câu lạc bộ Taekwondo Mizuki, địa chỉ B18/22R ấp 29"},
+    {"stt": 16, "don_vi_bau_cu": "06", "khu_vuc_bo_phieu": "16", "gom_ap": "31, 32, 33", "so_luong_cu_tri": 2348, "dia_diem_bo_phieu": "Văn phòng ấp 31, 32, 33, 34, 35, địa chỉ: C3/12B, đường Phạm Hùng, ấp 34"},
+    {"stt": 17, "don_vi_bau_cu": "06", "khu_vuc_bo_phieu": "17", "gom_ap": "34, 35", "so_luong_cu_tri": 2827, "dia_diem_bo_phieu": "Mượn địa điểm Quán ẩm thực Bình Xuyên, địa chỉ: C3/17, đường Phạm Hùng, ấp 35"},
+    {"stt": 18, "don_vi_bau_cu": "06", "khu_vuc_bo_phieu": "18", "gom_ap": "36, 37", "so_luong_cu_tri": 641, "dia_diem_bo_phieu": "Văn phòng ấp 36, 37"},
+    {"stt": 19, "don_vi_bau_cu": "07", "khu_vuc_bo_phieu": "19", "gom_ap": "38, 45", "so_luong_cu_tri": 1823, "dia_diem_bo_phieu": "Trường Tiểu học Phạm Hùng, địa chỉ đường 6A, KDC Đại Phúc, ấp 38"},
+    {"stt": 20, "don_vi_bau_cu": "07", "khu_vuc_bo_phieu": "20", "gom_ap": "46, 47", "so_luong_cu_tri": 1240, "dia_diem_bo_phieu": "Số 1 đường số 14, KDC Him Lam 6A (Sảnh công ty Him Lam)"},
+    {"stt": 21, "don_vi_bau_cu": "07", "khu_vuc_bo_phieu": "21", "gom_ap": "48, 49, 50", "so_luong_cu_tri": 3178, "dia_diem_bo_phieu": "Văn phòng ấp 50, địa chỉ số 23, đường số 7, KDC Trung Sơn, ấp 50"},
+    {"stt": 22, "don_vi_bau_cu": "08", "khu_vuc_bo_phieu": "22", "gom_ap": "39, 40", "so_luong_cu_tri": 2168, "dia_diem_bo_phieu": "Văn phòng liên ấp 39-43, địa chỉ: số 14, đường số 15, ấp 40, KDC Him Lam"},
+    {"stt": 23, "don_vi_bau_cu": "08", "khu_vuc_bo_phieu": "23", "gom_ap": "41, 42, 43", "so_luong_cu_tri": 2854, "dia_diem_bo_phieu": "Điểm sinh hoạt văn hóa ấp 43, địa chỉ C7C/18H1, ấp 43"},
+    {"stt": 24, "don_vi_bau_cu": "08", "khu_vuc_bo_phieu": "24", "gom_ap": "44", "so_luong_cu_tri": 1851, "dia_diem_bo_phieu": "Văn phòng ấp 44 - 45, địa chỉ: C13/QV58 đường Nguyễn Văn Linh, ấp 44"},
+    {"stt": 25, "don_vi_bau_cu": "09", "khu_vuc_bo_phieu": "25", "gom_ap": "51, 52", "so_luong_cu_tri": 2763, "dia_diem_bo_phieu": "Văn phòng ấp 1 xã Phong Phú cũ (hiện là Văn phòng ấp 51, 52, 53)"},
+    {"stt": 26, "don_vi_bau_cu": "09", "khu_vuc_bo_phieu": "26", "gom_ap": "53, 54", "so_luong_cu_tri": 2571, "dia_diem_bo_phieu": "Văn phòng ấp 54, 55, số 1873 đường Văn Tiến Dũng"},
+    {"stt": 27, "don_vi_bau_cu": "09", "khu_vuc_bo_phieu": "27", "gom_ap": "55, 56", "so_luong_cu_tri": 2735, "dia_diem_bo_phieu": "Trường Tiểu học Phong Phú 2 đường D3 KDC Phong Phú 4"},
+    {"stt": 28, "don_vi_bau_cu": "09", "khu_vuc_bo_phieu": "28", "gom_ap": "57", "so_luong_cu_tri": 2181, "dia_diem_bo_phieu": "Văn phòng ấp 57 đường số 19 KDC Phong Phú 4"},
+    {"stt":
