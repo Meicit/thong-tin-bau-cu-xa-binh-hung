@@ -20,6 +20,18 @@
           "chuc_vu": "Đại biểu chuyên trách",
           "don_vi": "Đơn vị số 1"
         }
+        {
+          "ten": "Ứng cử viên Quốc hội 01",
+          "anh": "qh_uv3.jpg",
+          "chuc_vu": "Đại biểu chuyên trách",
+          "don_vi": "Đơn vị số 1"
+        },
+        {
+          "ten": "Ứng cử viên Quốc hội 02",
+          "anh": "qh_uv4.jpg",
+          "chuc_vu": "Đại biểu chuyên trách",
+          "don_vi": "Đơn vị số 1"
+        }
       ]
     },
     {
