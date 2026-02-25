@@ -3,94 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin Bầu cử Xã Bình Hưng 2026-2031</title>
+    <title>Bầu Cử Xã Bình Hưng 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .candidate-card:hover { transform: translateY(-5px); transition: all 0.3s; }
-    </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-50">
 
-    <header class="bg-red-700 text-white py-8 shadow-lg text-center">
-        <h1 class="text-2xl md:text-4xl font-bold uppercase mb-2">Ủy ban Bầu cử Xã Bình Hưng</h1>
-        <p class="text-lg">Nhiệm kỳ 2026 – 2031</p>
-    </header>
+    <nav class="bg-red-700 text-white p-4 text-center font-bold text-xl">
+        HỆ THỐNG THÔNG TIN BẦU CỬ XÃ BÌNH HƯNG
+    </nav>
 
-    <main class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="glass p-6 rounded-xl shadow-sm border-l-4 border-red-600">
-                <h3 class="font-bold text-gray-500 uppercase text-sm">Khu vực bỏ phiếu</h3>
-                <p class="text-3xl font-bold">34</p>
-            </div>
-            <div class="glass p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
-                <h3 class="font-bold text-gray-500 uppercase text-sm">Tổng số cử tri</h3>
-                <p class="text-3xl font-bold">~80,000</p>
-            </div>
-            <div class="glass p-6 rounded-xl shadow-sm border-l-4 border-blue-600">
-                <h3 class="font-bold text-gray-500 uppercase text-sm">Địa điểm tiêu biểu</h3>
-                <p class="text-sm italic">Trường MN Tuệ Đức, THCS Nguyễn Thái Bình...</p>
-            </div>
-        </div>
-
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-map-marker-alt mr-2 text-red-600"></i> Tra cứu Khu vực bỏ phiếu</h2>
-            <div class="overflow-x-auto bg-white rounded-xl shadow">
-                <table class="min-w-full table-auto">
+    <div class="container mx-auto p-4">
+        <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4">Danh sách Khu vực bỏ phiếu</h2>
+            <div class="overflow-x-auto bg-white shadow rounded-lg">
+                <table class="min-w-full" id="station-table">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-6 py-3 text-left">KVBP</th>
-                            <th class="px-6 py-3 text-left">Gồm Ấp</th>
-                            <th class="px-6 py-3 text-left">Địa điểm bỏ phiếu</th>
-                            <th class="px-6 py-3 text-right">Số cử tri</th>
+                            <th class="p-3 text-left">KVBP</th>
+                            <th class="p-3 text-left">Ấp</th>
+                            <th class="p-3 text-left">Địa điểm</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 font-bold">01</td>
-                            <td class="px-6 py-4">Ấp 1, 3</td>
-                            <td class="px-6 py-4 text-sm">Trường Mầm non Tuệ Đức, số 2 đường 16, KDC Bình Hưng</td>
-                            <td class="px-6 py-4 text-right">2,914</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 font-bold">09</td>
-                            <td class="px-6 py-4">Ấp 13, 14</td>
-                            <td class="px-6 py-4 text-sm">Văn phòng liên ấp 12, 13, 14, 15, số 475 Quốc lộ 50</td>
-                            <td class="px-6 py-4 text-right">3,427</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="station-list">
+                        </tbody>
                 </table>
             </div>
         </section>
 
         <section>
-            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-users mr-2 text-red-600"></i> Danh sách Ứng cử viên</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="candidate-card bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 bg-gray-200 rounded-full mr-4 flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gray-400"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-xl uppercase">Đỗ Thanh Bình</h3>
-                            <p class="text-sm text-red-600">Đại biểu Quốc hội (dự kiến)</p>
-                        </div>
-                    </div>
-                    <div class="text-sm space-y-2 mb-6 text-gray-600">
-                        <p><strong>Năm sinh:</strong> 1967</p>
-                        <p><strong>Công tác:</strong> Bộ Nội vụ</p>
-                        <p><strong>Chức vụ:</strong> Bộ trưởng Bộ Nội vụ</p>
-                    </div>
-                    <button class="w-full py-2 bg-red-50 text-red-700 rounded-lg font-semibold hover:bg-red-700 hover:text-white transition">Xem Chương trình hành động</button>
-                </div>
+            <h2 class="text-xl font-bold mb-4">Danh sách Ứng cử viên</h2>
+            <div id="candidate-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 </div>
         </section>
-    </main>
+    </div>
 
-    <footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
-        <p>&copy; 2026 Ủy ban Bầu cử Xã Bình Hưng. Tài liệu phục vụ công tác tuyên truyền.</p>
-    </footer>
+    <script>
+        // Hàm lấy dữ liệu từ file JSON
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
 
+                // 1. Đổ dữ liệu vào bảng trạm bỏ phiếu
+                const stationList = document.getElementById('station-list');
+                data.stations.forEach(s => {
+                    stationList.innerHTML += `
+                        <tr class="border-t">
+                            <td class="p-3 font-bold">${s.id}</td>
+                            <td class="p-3">${s.ap}</td>
+                            <td class="p-3 text-sm">${s.address}</td>
+                        </tr>
+                    `;
+                });
+
+                // 2. Đổ dữ liệu vào danh sách ứng cử viên
+                const candidateGrid = document.getElementById('candidate-grid');
+                data.candidates.forEach(c => {
+                    candidateGrid.innerHTML += `
+                        <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-600">
+                            <h3 class="font-bold text-lg uppercase">${c.name}</h3>
+                            <p class="text-sm text-gray-600">KVBP: ${c.kvbp}</p>
+                            <p class="mt-2 text-xs">${c.position}</p>
+                            <button class="mt-3 text-red-600 font-semibold text-sm">Xem chi tiết</button>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Lỗi khi tải dữ liệu:", error);
+            }
+        }
+
+        // Chạy hàm khi trang web tải xong
+        window.onload = loadData;
+    </script>
 </body>
 </html>
