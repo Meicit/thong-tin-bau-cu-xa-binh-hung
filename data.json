@@ -1,0 +1,26 @@
+{
+  "stations": [
+    {
+      "id": "01",
+      "ap": "1, 3",
+      "address": "Trường Mầm non Tuệ Đức, địa chỉ số 2 đường số 16, KDC Bình Hưng, ấp 3",
+      "voters": "2.914"
+    },
+    {
+      "id": "09",
+      "ap": "13, 14",
+      "address": "Văn phòng liên ấp 12, 13, 14, 15, số 475 Quốc lộ 50",
+      "voters": "3.427"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "C",
+      "name": "Nguyễn Văn C",
+      "kvbp": "09",
+      "birth": "19xx",
+      "position": "Cán bộ chuyên trách",
+      "program": "1. Thực hiện tốt vai trò đại biểu... 2. Liên hệ chặt chẽ với cử tri..."
+    }
+  ]
+}
