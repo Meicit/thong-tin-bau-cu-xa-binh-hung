@@ -22,11 +22,11 @@
       "icon": "fa-city",
       "mau": "bg-blue-800",
       "ds_ung_vien": [
-        { "ten": "Ứng cử viên TP 01", "anh": "tp_uv1.jpg", "chuc_vu": "Đại biểu HĐND Thành phố", "don_vi": "Đơn vị bầu cử" },
-        { "ten": "Ứng cử viên TP 02", "anh": "tp_uv2.jpg", "chuc_vu": "Đại biểu HĐND Thành phố", "don_vi": "Đơn vị bầu cử" },
-        { "ten": "Ứng cử viên TP 03", "anh": "tp_uv3.jpg", "chuc_vu": "Đại biểu HĐND Thành phố", "don_vi": "Đơn vị bầu cử" },
-        { "ten": "Ứng cử viên TP 04", "anh": "tp_uv4.jpg", "chuc_vu": "Đại biểu HĐND Thành phố", "don_vi": "Đơn vị bầu cử" },
-        { "ten": "Ứng cử viên TP 05", "anh": "tp_uv5.jpg", "chuc_vu": "Đại biểu HĐND Thành phố", "don_vi": "Đơn vị bầu cử" }
+        { "ten": "Ứng cử viên TP 01", "anh": "tp_uv1.jpg", "chuc_vu": "Đại biểu HĐND TP", "don_vi": "Đơn vị bầu cử" },
+        { "ten": "Ứng cử viên TP 02", "anh": "tp_uv2.jpg", "chuc_vu": "Đại biểu HĐND TP", "don_vi": "Đơn vị bầu cử" },
+        { "ten": "Ứng cử viên TP 03", "anh": "tp_uv3.jpg", "chuc_vu": "Đại biểu HĐND TP", "don_vi": "Đơn vị bầu cử" },
+        { "ten": "Ứng cử viên TP 04", "anh": "tp_uv4.jpg", "chuc_vu": "Đại biểu HĐND TP", "don_vi": "Đơn vị bầu cử" },
+        { "ten": "Ứng cử viên TP 05", "anh": "tp_uv5.jpg", "chuc_vu": "Đại biểu HĐND TP", "don_vi": "Đơn vị bầu cử" }
       ]
     },
     {
@@ -36,17 +36,24 @@
       "icon": "fa-users",
       "mau": "bg-emerald-700",
       "ds_ung_vien": [
-        { "ten": "ÔNG NGUYỄN VĂN C", "anh": "xa_uv_nguyenvanc.jpg", "chuc_vu": "Đại biểu HĐND Xã", "don_vi": "Đơn vị bầu cử số 9" }
+        { "ten": "ÔNG NGUYỄN VĂN C", "anh": "xa_uv_nguyenvanc.jpg", "chuc_vu": "Đại biểu HĐND Xã", "don_vi": "Khu vực số 09" }
       ]
     }
   ],
   "danh_sach_khu_vuc": [
-    {"stt":1,"khu_vuc":"01","ap":"1, 3","so_luong":2914,"dia_diem":"Trường Mầm non Tuệ Đức, địa chỉ số 2 đường số 16, KDC Bình Hưng, ấp 3"},
+    {
+      "stt": 1,
+      "khu_vuc": "01",
+      "ap": "1, 3",
+      "so_luong": 2914,
+      "dia_diem": "Trường Mầm non Tuệ Đức, số 2 đường số 16, KDC Bình Hưng, ấp 3",
+      "map_link": "https://www.google.com/maps/dir//10.7287387,106.6524035/@10.7366632,106.6645009,3479m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI2MDIyMy4wIKXMDSoASAFQAw%3D%3D"
+    },
     {"stt":2,"khu_vuc":"02","ap":"2","so_luong":1693,"dia_diem":"Trường Mầm non Thủy Tiên cũ, kế Trụ sở UBND xã Bình Hưng"},
     {"stt":3,"khu_vuc":"03","ap":"4","so_luong":1262,"dia_diem":"Văn phòng ấp 2-4, địa chỉ số A10/9A đường số 10A ấp 4"},
     {"stt":4,"khu_vuc":"04","ap":"5, 70","so_luong":2908,"dia_diem":"Trường Tiểu học Bình Hưng, số 3, đường 10, KDC Bình Hưng, ấp 5"},
     {"stt":5,"khu_vuc":"05","ap":"6, 7, 8","so_luong":3279,"dia_diem":"Trường THCS Nguyễn Thái Bình, đường số 2, KDC Bình Hưng, ấp 7"},
-    {"stt":6,"khu_vuc":"06","ap":"9, 10, 11","so_luong":3556,"dia_diem":"Văn phòng ấp liên ấp 19-25, 29, 30, địa chỉ: 920 Văn Tiến Dũng, ấp 11"},
+    {"stt":6,"khu_vuc":"06","ap":"9, 10, 11","so_luong":3556,"dia_diem":"Văn phòng liên ấp 19-25, 29, 30, số 920 Văn Tiến Dũng, ấp 11"},
     {"stt":7,"khu_vuc":"07","ap":"18, 20, 21","so_luong":2611,"dia_diem":"Nhà sinh hoạt cộng đồng Block C chung cư Ehomes, ấp 20"},
     {"stt":8,"khu_vuc":"08","ap":"12","so_luong":1307,"dia_diem":"Nhà số 447/38/8, ấp 12 (Nhà ông Trần Thanh Hoàng)"},
     {"stt":9,"khu_vuc":"09","ap":"13, 14","so_luong":3427,"dia_diem":"Văn phòng liên ấp 12, 13, 14, 15, số 475, Quốc lộ 50"},
@@ -72,7 +79,7 @@
     {"stt":29,"khu_vuc":"29","ap":"58, 59","so_luong":1994,"dia_diem":"Văn phòng ấp 58, 59, số 1758 đường Văn Tiến Dũng"},
     {"stt":30,"khu_vuc":"30","ap":"60, 61, 62","so_luong":3196,"dia_diem":"Trụ sở UBND xã Phong Phú cũ, số 294 Trịnh Quang Nghị"},
     {"stt":31,"khu_vuc":"31","ap":"64, 65","so_luong":2557,"dia_diem":"Trung tâm học tập cộng đồng, 1511 đường Văn Tiến Dũng"},
-    {"stt":32,"khu_vuc":"32","ap":"63, 66","so_luong":2744,"dia_diem":"Văn phòng ấp 66, Công viên Gia Hòa đường số 3 KDC Gia Hòa"},
+    {"stt":32,"khu_vuc":"32","ap":"63, 66","so_luong":2744,"dia_diem":"Văn phòng ấp 66, Công viên Gia Hòa đường số 3"},
     {"stt":33,"khu_vuc":"33","ap":"67","so_luong":2244,"dia_diem":"Trường Tiểu học Lê Quý Đôn, Số 31 đường 5, KDC 13E"},
     {"stt":34,"khu_vuc":"34","ap":"68, 69","so_luong":2654,"dia_diem":"Chung cư Aview, số 1 đường Nguyễn Văn Linh, ấp 69"}
   ]
